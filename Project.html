@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Random Color Generator</title>
+	<style>
+		* { box-sizing: border-box; }
+		body {
+			min-height: 100vh;
+			margin: 0;
+			display: grid;
+			place-items: center;
+			font-family: system-ui, sans-serif;
+			color: #202638;
+			background: #dce8f4;
+			transition: background-color .35s ease;
+		}
+		.card {
+			width: min(90%, 420px);
+			padding: 38px 30px;
+			text-align: center;
+			background: #ffffffdf;
+			border-radius: 22px;
+			box-shadow: 0 16px 45px #26334b24;
+		}
+		.swatch {
+			width: 110px;
+			height: 110px;
+			margin: 0 auto 20px;
+			background: #dce8f4;
+			border: 6px solid white;
+			border-radius: 50%;
+			box-shadow: 0 4px 14px #26334b20;
+		}
+		h1 { margin: 0 0 8px; }
+		p { color: #657087; }
+		button {
+			margin-top: 12px;
+			padding: 12px 22px;
+			border: 0;
+			border-radius: 999px;
+			color: white;
+			background: #4356a5;
+			font: inherit;
+			font-weight: 700;
+			cursor: pointer;
+		}
+		button:hover { background: #303f83; }
+		#hex { font-family: ui-monospace, monospace; font-weight: 700; }
+	</style>
+</head>
+<body>
+	<main class="card">
+		<div class="swatch" id="swatch" aria-hidden="true"></div>
+		<h1>Color of the Moment</h1>
+		<p>Click the button to discover a random color.</p>
+		<p id="hex" aria-live="polite">#DCE8F4</p>
+		<button id="new-color" type="button">Pick a color</button>
+	</main>
+	<script>
+		const makeColor = () => `#${Math.floor(Math.random() * 0x1000000).toString(16).padStart(6, "0")}`;
+		document.querySelector("#new-color").addEventListener("click", () => {
+			const color = makeColor();
+			document.body.style.backgroundColor = color;
+			document.querySelector("#swatch").style.backgroundColor = color;
+			document.querySelector("#hex").textContent = color.toUpperCase();
+		});
+	</script>
+</body>
+</html>
